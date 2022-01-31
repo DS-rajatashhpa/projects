@@ -1,34 +1,44 @@
 {% extends 'base.html' %}
 {%  block title %}
-  Market Page
+Market Page
 {% endblock %}
-
 {% block content %}
+<div class="row" style="margin-top:20px; margin-left:20px">
+   <div class="col-8">
+       <h2>Available Items in the store</h2>
+       <p>Click on one of the items to buy</p>
       <table class="table table-hover table-dark">
-        <thead>
+         <thead>
             <tr>
-                <!-- Your Columns HERE -->
-                <th scope="col">ID</th>
-                <th scope="col">Name</th>
-                <th scope="col">Barcode</th>
-                <th scope="col">Price</th>
-                <th scope="col">Options</th>
+               <!-- Your Columns HERE -->
+               <th scope="col">ID</th>
+               <th scope="col">Name</th>
+               <th scope="col">Barcode</th>
+               <th scope="col">Price</th>
+               <th scope="col">Options</th>
             </tr>
-        </thead>
-        <tbody>
+         </thead>
+         <tbody>
             <!-- Your rows inside the table HERE: -->
             {% for item in items%}
-                <tr>
-                    <td>{{ item.id }}</td>
-                    <td>{{ item.name }}</td>
-                    <td>{{ item.barcode }}</td>
-                    <td>{{ item.price }}$</td>
-                    <td>
-                        <button class="btn btn-outline btn-info">More Info</button>
-                        <button class="btn btn-outline btn-success">Purhase This Item</button>
-                    </td>
-                </tr>
+            {% include 'includes/item_modals.html'%}
+            <tr>
+               <td>{{ item.id }}</td>
+               <td>{{ item.name }}</td>
+               <td>{{ item.barcode }}</td>
+               <td>{{ item.price }}$</td>
+               <td>
+                  <button class="btn btn-outline btn-info" data-toggle="modal" data-target="#Modal-MoreInfo-{{ item.id }}">More Info</button>
+                  <button class="btn btn-outline btn-success" data-toggle ="modal" data-target = "#Modal-PurchaseConfirm-{{ item.id }}">Purhase This Item</button>
+               </td>
+            </tr>
             {% endfor %}
-        </tbody>
+         </tbody>
       </table>
+   </div>
+   <div class="col-4">
+       <h2>Owned Item</h2>
+       <p>Continue to cart</p>
+   </div>
+</div>
 {% endblock %}
